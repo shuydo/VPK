@@ -1,9 +1,13 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/functions';
-import 'firebase/auth';
-import firebaseConfig from './firebaseConfig';
+// import firebase from 'firebase/app'; from fit
+// import 'firebase/firestore';
+// import 'firebase/functions';
+// import 'firebase/auth';
 
-const app = firebase.initializeApp(firebaseConfig);
+// import firebase from 'firebase';
 
-export default app;
+// import firebaseConfig from './firebaseConfig';
+
+// const app = firebase.initializeApp(firebaseConfig);
+
+// export default app;
+export {};

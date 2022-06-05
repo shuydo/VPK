@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { createContext } from 'react';
+
 import ReactDOM from 'react-dom';
+
+import firebase from 'firebase';
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebaseConfig from '../src/common/firebaseConfig';
 
 import reportWebVitals from './reportWebVitals';
 import App from './components/Unknown/App';
 
+firebase.initializeApp(firebaseConfig);
+export const Context = createContext<{
+  firebase: any;
+  auth: any;
+  firestore: any;
+} | null>(null);
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Context.Provider
+      value={{
+        firebase,
+        auth,
+        firestore,
+      }}
+    >
+      <App />
+    </Context.Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
