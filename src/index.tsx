@@ -1,36 +1,28 @@
-import React, { createContext } from 'react';
-
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import firebaseConfig from '../src/common/firebaseConfig';
+import { FirebaseAppProvider } from 'reactfire';
 
-import reportWebVitals from './reportWebVitals';
+import './index.css';
 import App from './components/Unknown/App';
+import reportWebVitals from './reportWebVitals';
 
-firebase.initializeApp(firebaseConfig);
-export const Context = createContext<{
-  firebase: any;
-  auth: any;
-  firestore: any;
-} | null>(null);
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+const fbConfig = {
+  apiKey: 'AIzaSyA--njCClCpuCua3iFIgJQEulcfQ3Ttqjk',
+  projectId: 'test-project-2022-06-01',
+};
+
+firebase.initializeApp(fbConfig);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Context.Provider
-      value={{
-        firebase,
-        auth,
-        firestore,
-      }}
-    >
+  <FirebaseAppProvider firebaseConfig={fbConfig}>
+    <React.StrictMode>
       <App />
-    </Context.Provider>
-  </React.StrictMode>,
+    </React.StrictMode>
+  </FirebaseAppProvider>,
   document.getElementById('root'),
 );
 

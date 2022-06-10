@@ -1,0 +1,93 @@
+import React, {
+  ChangeEvent,
+  FormEventHandler,
+  MouseEvent,
+  useState,
+} from 'react';
+import { useAuth } from 'reactfire';
+
+const Login: React.FC = () => {
+  const [mail, setMail] = useState('');
+  const [pass, setPass] = useState('');
+  const auth = useAuth();
+
+  const changeHandle = (e: ChangeEvent<HTMLInputElement>): void => {
+    switch (e.target.type) {
+      case 'email':
+        setMail(e.target.value);
+        break;
+
+      case 'password':
+        setPass(e.target.value);
+        break;
+
+      default:
+    }
+  };
+  const handleLogin = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    console.log('Log: ', mail, ' - ', pass);
+  };
+
+  const handleCreateAcc = async (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    console.log('Acc: ', mail, ' - ', pass);
+    //   // const resp =
+    await auth.signInWithEmailAndPassword(mail, pass);
+    //   // alert(`Logged In: ${resp.user.email}`);
+    // } catch (err) {
+    //   alert('ERROR while creating account');
+    // }
+
+    // if (evt.nativeEvent.submitter?.name === 'createAccount') {
+    await auth.createUserWithEmailAndPassword(mail, pass);
+    alert('Account Created');
+    //     return;
+    //   }
+  };
+
+  return (
+    <form
+      name="form1"
+      style={{
+        width: '50%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <input type="email" placeholder="Email" onChange={changeHandle} />
+      <input type="password" placeholder="Password" onChange={changeHandle} />
+      <button type="button" onClick={handleLogin}>
+        Log In
+      </button>
+      <button type="button" onClick={handleCreateAcc}>
+        Submit
+      </button>
+      {/* <input
+        style={{ margin: 11, cursor: 'pointer' }}
+        name="email"
+        type="email"
+        placeholder="email"
+      />
+      <input
+        style={{ margin: 11, cursor: 'pointer' }}
+        name="pass"
+        type="password"
+        placeholder="password"
+      />
+      <button type="submit" style={{ margin: 11, cursor: 'pointer' }}>
+        Log In
+      </button>
+      <button
+        type="submit"
+        name="createAccount"
+        style={{ margin: 11, cursor: 'pointer' }}
+      >
+        Create Acc
+      </button> */}
+    </form>
+  );
+};
+
+export default Login;

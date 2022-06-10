@@ -1,41 +1,49 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
+import { useSigninCheck } from 'reactfire';
+
+import Home from '../Home';
+import Login from '../Login';
 // import { FirebaseAppProvider,useFirebaseApp } from 'reactfire';
-// import firebase from 'firebase';
-// import 'firebase/auth';
-// import 'firebase/firestore';
+
+// import Context from '../../../common/context';
 // import firebaseConfig from '../../../common/firebaseConfig';
 // import firebaseApp from '../../../common/firebaseApp';
 
 import theme from '../../../common/theme';
-import Nav from '../../Navbar';
-import Root from '../Root';
-import { UIContextProvider } from '../UIContext';
-
-// const app =
-// firebase.initializeApp(firebaseConfig);
-// export const Context = createContext<{
-//   firebase: any;
-//   auth: any;
-//   firestore: any;
-// } | null>(null);
-// const auth = firebase.auth();
-// const firestore = firebase.firestore();
+// import Nav from '../../Navbar';
+// import Root from '../Root';
+// import { UIContextProvider } from '../UIContext';
 
 const App: React.FC = () => {
+  const { status, data: sign } = useSigninCheck();
+
+  //   <Router basename={process.env.PUBLIC_URL || '/'}>
+  //     <Nav />
+  //     <UIContextProvider>
+  //       App
+  //       <Root />
+  //     </UIContextProvider>
+
   return (
-    // <FirebaseAppProvider firebaseApp={firebaseApp}>
     <ThemeProvider theme={theme}>
-      <Router basename={process.env.PUBLIC_URL || '/'}>
-        <Nav />
+      <BrowserRouter>
         <CssBaseline />
-        <UIContextProvider>
-          <Root />
-        </UIContextProvider>
-      </Router>
+
+        {status === 'loading' && <div>Loading...</div>}
+
+        {sign?.signedIn ? (
+          <>
+            <Redirect to="/home" /> <Home />
+          </>
+        ) : (
+          <>
+            <Redirect to="/login" /> <Login />
+          </>
+        )}
+      </BrowserRouter>
     </ThemeProvider>
-    // </FirebaseAppProvider>
   );
 };
 

@@ -1,0 +1,28 @@
+{/* <button type="submit" onClick={handleLogin}>
+        Log In
+      </button>
+      <button type="button" onClick={handleCreateAcc}>
+        Submit
+      </button> */}
+        {/* <input
+        style={{ margin: 11, cursor: 'pointer' }}
+        name="email"
+        type="email"
+        placeholder="email"
+      />
+      <input
+        style={{ margin: 11, cursor: 'pointer' }}
+        name="pass"
+        type="password"
+        placeholder="password"
+      />
+      <button type="submit" style={{ margin: 11, cursor: 'pointer' }}>
+        Log In
+      </button>
+      <button
+        type="submit"
+        name="createAccount"
+        style={{ margin: 11, cursor: 'pointer' }}
+      >
+        Create Acc
+      </button> */}
