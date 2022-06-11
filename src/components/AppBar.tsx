@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import React from 'react';
 import { useAuth } from 'reactfire';
 import AppBar from '@mui/material/AppBar';
@@ -10,48 +9,35 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-// import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-// const pages = ['Products', 'Pricing', 'Blog'];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
   const auth = useAuth();
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null,
   );
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  // const handleCloseUserMenu = () => {
-  //   auth.signOut();
-  //   console.log('Ky');
-  //   setAnchorElUser(null);
-  // };
 
   return (
     <AppBar position="static" style={{ backgroundColor: '#F50057' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MenuIcon />
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -60,7 +46,6 @@ const ResponsiveAppBar = () => {
             sx={{
               ml: 3.5,
               display: { xs: 'none', md: 'flex' },
-              // fontFamily: 'monospace',
               fontWeight: 500,
               fontSize: 20,
               letterSpacing: '0.15px',
@@ -82,7 +67,7 @@ const ResponsiveAppBar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            {/* <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -99,13 +84,7 @@ const ResponsiveAppBar = () => {
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
-            >
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))} */}
-            </Menu>
+            ></Menu> */}
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -126,18 +105,7 @@ const ResponsiveAppBar = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))} */}
-          </Box>
-
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box> */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -158,10 +126,8 @@ const ResponsiveAppBar = () => {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              // onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                // <MenuItem key={setting} onClick={handleCloseUserMenu}>
                 <MenuItem key={setting} onClick={() => auth.signOut()}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>

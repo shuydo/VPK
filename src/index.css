@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 .login_title {
@@ -15,4 +14,14 @@
   font-size: 40px;
   line-height: 112px;
   letter-spacing: -1.5px;
+}
+
+.filledInput::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  width: 375px;
+  background-color: #f0f0f0;
+  z-index: 1;
 }
