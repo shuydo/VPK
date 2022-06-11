@@ -6,7 +6,8 @@ import InputAdornments from './InputAdornments';
 
 const Login: React.FC = () => {
   return (
-    <div style={{ width: 1440, marginLeft: 'auto', marginRight: 'auto' }}>
+    <div>
+      {/* <div style={{ width: 1440, marginLeft: 'auto', marginRight: 'auto' }}> */}
       <div style={{ display: 'flex' }}>
         <img src={pic} alt="" />
 

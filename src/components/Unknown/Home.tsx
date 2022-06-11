@@ -4,28 +4,28 @@ import ResponsiveAppBar from '../AppBar';
 import Navbar from './NavbarMy';
 
 const Home: React.FC = () => {
-  const auth = useAuth();
+  // const auth = useAuth();
   const itemsRef = useFirestore().collection('items');
-  const { data, status } = useFirestoreCollection(itemsRef);
+  // const { data, status } = useFirestoreCollection(itemsRef);
 
-  const doAddItems = async () => {
-    try {
-      await itemsRef.doc().set({ name: new Date().getTime() });
-    } catch (err) {
-      alert(`ERROR while adding`);
-    }
-  };
+  // const doAddItems = async () => {
+  //   try {
+  //     await itemsRef.doc().set({ name: new Date().getTime() });
+  //   } catch (err) {
+  //     alert(`ERROR while adding`);
+  //   }
+  // };
 
-  const doDeleteItem = async (id: string) => {
-    try {
-      await itemsRef.doc(id).delete();
-    } catch (err) {
-      alert('ERROR while deleting');
-    }
-  };
+  // const doDeleteItem = async (id: string) => {
+  //   try {
+  //     await itemsRef.doc(id).delete();
+  //   } catch (err) {
+  //     alert('ERROR while deleting');
+  //   }
+  // };
 
   return (
-    <div style={{ width: 1440, marginLeft: 'auto', marginRight: 'auto' }}>
+    <div style={{ minWidth: 320, marginLeft: 'auto', marginRight: 'auto' }}>
       <ResponsiveAppBar />
       {/* <h1>{auth.currentUser?.email}</h1>
       <button
