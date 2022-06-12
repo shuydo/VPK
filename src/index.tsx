@@ -8,6 +8,7 @@ import { FirebaseAppProvider } from 'reactfire';
 
 import './index.css';
 import App from './components/Unknown/App';
+import { UIContextProvider } from './components/Unknown/UIContext';
 import reportWebVitals from './reportWebVitals';
 
 const fbConfig = {
@@ -20,7 +21,9 @@ firebase.initializeApp(fbConfig);
 ReactDOM.render(
   <FirebaseAppProvider firebaseConfig={fbConfig}>
     <React.StrictMode>
-      <App />
+      <UIContextProvider>
+        <App />
+      </UIContextProvider>
     </React.StrictMode>
   </FirebaseAppProvider>,
   document.getElementById('root'),

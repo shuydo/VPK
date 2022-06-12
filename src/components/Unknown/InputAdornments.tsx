@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import FilledInput from '@mui/material/FilledInput';
@@ -8,11 +8,16 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useAuth } from 'reactfire';
+import { UIContext } from './UIContext';
+// const Login: React.FC = () => {} //export default Login;
 
-export default function InputAdornments() {
+const InputAdornments: React.FC = () => {
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
+  const [isAct, setIsAct] = useState(false);
+
   const [passIsVisible, setPassIsVisible] = useState(false);
+  const { setAlert } = useContext(UIContext);
   const auth = useAuth();
 
   const changeHandle = (evt: ChangeEvent<HTMLInputElement>): void => {
@@ -23,29 +28,40 @@ export default function InputAdornments() {
 
       default:
         setPass(evt.target.value);
-        break;
     }
   };
 
+  const snackHandler = React.useCallback(
+    async (messObj) => {
+      setAlert(messObj);
+    },
+    [setAlert],
+  );
+
   const handleSubmit = async (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
+
     try {
       switch (evt.currentTarget.type) {
         case 'button':
           await auth.createUserWithEmailAndPassword(mail, pass);
-          alert(`Account Created`);
+          snackHandler({ show: true, severity: 'info', message: 'Created' });
           break;
 
-        default: {
-          const resp = await auth.signInWithEmailAndPassword(mail, pass);
-          alert(`Logged In: ${resp.user?.email}`);
-          break;
-        }
+        default:
+          await auth.signInWithEmailAndPassword(mail, pass); // resp.user?.email
+          snackHandler({ show: true, severity: 'info', message: 'Logged' });
+        // break;
       }
     } catch (err) {
-      alert(`ERROR: ${(err as Error).message}`);
+      snackHandler({
+        show: true,
+        severity: 'error',
+        message: (err as Error).message,
+      });
     }
   };
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <FormControl
@@ -79,7 +95,6 @@ export default function InputAdornments() {
               <IconButton
                 aria-label="toggle password visibility"
                 onClick={() => setPassIsVisible(!passIsVisible)}
-                // onMouseDown={(e) => e.preventDefault()}
                 edge="end"
               >
                 {passIsVisible ? <VisibilityOff /> : <Visibility />}
@@ -89,6 +104,7 @@ export default function InputAdornments() {
         />
       </FormControl>
       <button
+        // disabled={{1 ? '' : false}}
         style={{
           height: 42,
           fontSize: 15,
@@ -98,13 +114,17 @@ export default function InputAdornments() {
           borderRadius: 4,
           boxShadow:
             '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)',
+          cursor: 'pointer',
         }}
         type="submit"
         onClick={handleSubmit}
       >
         LOGIN
       </button>
-      {/* <button type="button" onClick={handleSubmit}>Create Acc</button> */}
+
+      {/* <button type="button" onClick={handleSubmit}>Create Acc      </button> */}
     </Box>
   );
-}
+};
+
+export default InputAdornments;

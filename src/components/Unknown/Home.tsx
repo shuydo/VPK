@@ -1,11 +1,13 @@
 import React from 'react';
-import { useAuth, useFirestore, useFirestoreCollection } from 'reactfire';
-import ResponsiveAppBar from '../AppBar';
-import Navbar from './NavbarMy';
+import { useFirestore /* , useAuth,useFirestoreCollection */ } from 'reactfire';
+import ResponsiveAppBar from '../wRespMnu';
+// import ResponsiveAppBar from '../AppBar';
+// import Navbar from './NavbarMy';
 
 const Home: React.FC = () => {
   // const auth = useAuth();
-  const itemsRef = useFirestore().collection('items');
+  // const itemsRef =
+  useFirestore().collection('items');
   // const { data, status } = useFirestoreCollection(itemsRef);
 
   // const doAddItems = async () => {

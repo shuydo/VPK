@@ -1,4 +1,5 @@
-import React, { ChangeEvent, MouseEvent, useState } from 'react';
+import { Box /* ,Container */ } from '@mui/material';
+import React /* , { ChangeEvent, MouseEvent, useState } */ from 'react';
 
 import pic from '../../img/hero.jpg';
 import vector from '../../img/logo.svg';
@@ -6,15 +7,23 @@ import InputAdornments from './InputAdornments';
 
 const Login: React.FC = () => {
   return (
-    <div>
-      {/* <div style={{ width: 1440, marginLeft: 'auto', marginRight: 'auto' }}> */}
-      <div style={{ display: 'flex' }}>
+    <Box
+      sx={{
+        width: { md: 1440 },
+        display: 'flex',
+        mx: 'auto',
+        justifyContent: 'center',
+      }}
+    >
+      <Box sx={{ width: '50%', display: { xs: 'none', md: 'block' } }}>
         <img src={pic} alt="" />
+      </Box>
 
+      <Box sx={{ width: { xs: '50%', md: '100%' } }}>
         <form
           autoComplete="on"
           style={{
-            width: '50%',
+            width: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -25,8 +34,8 @@ const Login: React.FC = () => {
 
           <InputAdornments />
         </form>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

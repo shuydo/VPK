@@ -15,6 +15,7 @@ import theme from '../../../common/theme';
 // import Nav from '../../Navbar';
 // import Root from '../Root';
 // import { UIContextProvider } from '../UIContext';
+// console.log('theme: ', theme);
 
 const App: React.FC = () => {
   const { status, data: sign } = useSigninCheck();
@@ -39,7 +40,7 @@ const App: React.FC = () => {
           </>
         ) : (
           <>
-            <Redirect to="/login" /> <Login />
+            <Redirect to="/signin" /> <Login />
           </>
         )}
       </BrowserRouter>
